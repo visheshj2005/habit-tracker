@@ -1,0 +1,1041 @@
+/* ==========================================================
+   Habit Heatmap Tracker — Neo-Brutalism Stylesheet
+   English color palette · Light background · Hard shadows
+   ========================================================== */
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- Design Tokens --- */
+:root {
+  /* Canvas (warm cream background) */
+  --bg-canvas: #FBF7F0;
+  --bg-card: #FFFFFF;
+
+  /* Neo-Brutalism: thick borders + hard shadows */
+  --border-color: #2B2B2B;
+  --border-width: 2.5px;
+  --shadow-color: #2B2B2B;
+  --shadow-sm: 3px 3px 0 #2B2B2B;
+  --shadow-md: 5px 5px 0 #2B2B2B;
+  --shadow-lg: 7px 7px 0 #2B2B2B;
+
+  /* Text */
+  --text-primary: #2B2B2B;
+  --text-secondary: #5C5C5C;
+  --text-muted: #8A8A8A;
+
+  /* English Garden — Heatmap Palette */
+  --heat-0: #EDE8E0;
+  --heat-1: #B8D4B8;
+  --heat-2: #7BAE7F;
+  --heat-3: #3A9E4A;
+  --heat-4: #1B6E2E;
+
+  /* English Accent Colors */
+  --accent-green: #2D6A4F;
+  --accent-red: #C0504D;
+  --accent-gold: #D4A843;
+  --accent-blue: #3D5A80;
+  --accent-purple: #7E57C2;
+  --accent-cream: #FFF8E7;
+
+  /* Stat Card Tints */
+  --tint-fire: #FFF0E6;
+  --tint-gold: #FFF8E1;
+  --tint-mint: #E8F5E9;
+  --tint-lavender: #EDE7F6;
+
+  /* Grid Dimensions */
+  --cell-size: 16px;
+  --cell-gap: 4px;
+  --cell-radius: 4px;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Transitions — snappy for neo-brutalism */
+  --transition-fast: 120ms ease;
+  --transition-normal: 200ms ease;
+
+  /* Fonts */
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont,
+               'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'Space Mono', 'SF Mono', 'Cascadia Code', monospace;
+}
+
+/* --- Base --- */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ===========================================================
+   DECORATIVE ACCENT BAR (top of page)
+   =========================================================== */
+.accent-bar {
+  height: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-green) 0%,
+    var(--accent-green) 25%,
+    var(--accent-gold) 25%,
+    var(--accent-gold) 50%,
+    var(--accent-red) 50%,
+    var(--accent-red) 75%,
+    var(--accent-blue) 75%,
+    var(--accent-blue) 100%
+  );
+}
+
+/* ===========================================================
+   LAYOUT
+   =========================================================== */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+/* ===========================================================
+   HEADER
+   =========================================================== */
+.header {
+  padding: 40px 24px 28px;
+}
+
+.header-content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Neo-brutalism badge: thick border + hard shadow */
+.logo-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  font-size: 28px;
+  background: var(--accent-cream);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.logo h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  position: relative;
+  display: inline-block;
+}
+
+/* Yellow highlight under title — classic neo-brutalism */
+.logo h1::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: -2px;
+  right: -2px;
+  height: 10px;
+  background: var(--accent-gold);
+  opacity: 0.35;
+  z-index: -1;
+  border-radius: 2px;
+}
+
+.tagline {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* ===========================================================
+   HABIT SELECTOR BAR
+   =========================================================== */
+.habit-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.habit-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Neo-brutalism pill: thick border + hard shadow */
+.habit-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border: 2px solid var(--border-color);
+  border-radius: 100px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              background var(--transition-fast),
+              color var(--transition-fast);
+  user-select: none;
+}
+
+.habit-pill:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--shadow-color);
+  color: var(--text-primary);
+}
+
+/* Active: filled green with bigger shadow */
+.habit-pill.active {
+  background: var(--accent-green);
+  color: #FFFFFF;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--shadow-color);
+}
+
+.habit-pill:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--shadow-color);
+}
+
+.habit-emoji {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.habit-name {
+  line-height: 1;
+}
+
+.habit-delete {
+  display: none;
+  margin-left: 2px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.6;
+  padding: 0 2px;
+  border-radius: 4px;
+  transition: opacity var(--transition-fast);
+}
+
+.habit-pill:hover .habit-delete {
+  display: inline-flex;
+}
+
+.habit-delete:hover {
+  opacity: 1;
+  color: var(--accent-red);
+}
+
+/* Add Habit button — dashed border */
+.add-habit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: 2px dashed var(--border-color);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.add-habit-btn:hover {
+  border-style: solid;
+  color: var(--accent-green);
+  background: var(--tint-mint);
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  transform: translate(-1px, -1px);
+}
+
+.add-habit-btn:active {
+  transform: translate(0, 0);
+  box-shadow: 1px 1px 0 var(--shadow-color);
+}
+
+.add-habit-btn span {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* ===========================================================
+   HEATMAP CARD
+   =========================================================== */
+.heatmap-card {
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-md);
+}
+
+/* Card header */
+.heatmap-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 2px dashed var(--border-color);
+}
+
+.heatmap-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.heatmap-hint {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-canvas);
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border-color);
+}
+
+/* Horizontal scroll wrapper for mobile */
+.heatmap-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 6px;
+}
+
+.heatmap-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.heatmap-scroll::-webkit-scrollbar-track {
+  background: var(--bg-canvas);
+  border-radius: 3px;
+}
+.heatmap-scroll::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 3px;
+}
+
+/* Month labels row */
+.heatmap-months {
+  position: relative;
+  height: 22px;
+  margin-bottom: 6px;
+  padding-left: 44px; /* matches .heatmap-days width */
+  min-width: max-content;
+}
+
+.month-label {
+  position: absolute;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  top: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Grid body: day labels + cells side by side */
+.heatmap-body {
+  display: flex;
+  min-width: max-content;
+}
+
+.heatmap-days {
+  display: grid;
+  grid-template-rows: repeat(7, var(--cell-size));
+  gap: var(--cell-gap);
+  width: 44px;
+  flex-shrink: 0;
+}
+
+.heatmap-days span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  height: var(--cell-size);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* ===========================================================
+   THE HEATMAP GRID
+   =========================================================== */
+.heatmap-grid {
+  display: grid;
+  grid-template-rows: repeat(7, var(--cell-size));
+  grid-auto-flow: column;
+  grid-auto-columns: var(--cell-size);
+  gap: var(--cell-gap);
+}
+
+/* Neo-brutalism cells: visible border on each cell */
+.heatmap-cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border-radius: var(--cell-radius);
+  border: 1.5px solid rgba(43, 43, 43, 0.12);
+  background-color: var(--heat-0);
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+              background-color var(--transition-fast),
+              box-shadow var(--transition-fast),
+              border-color var(--transition-fast);
+  animation: cell-appear 0.35s ease both;
+  position: relative;
+}
+
+/* --- Intensity Levels --- */
+.heatmap-cell[data-level="0"] {
+  background-color: var(--heat-0);
+  border-color: rgba(43, 43, 43, 0.12);
+}
+
+.heatmap-cell[data-level="1"] {
+  background-color: var(--heat-1);
+  border-color: rgba(43, 43, 43, 0.2);
+}
+
+.heatmap-cell[data-level="2"] {
+  background-color: var(--heat-2);
+  border-color: rgba(43, 43, 43, 0.25);
+}
+
+.heatmap-cell[data-level="3"] {
+  background-color: var(--heat-3);
+  border-color: rgba(43, 43, 43, 0.3);
+}
+
+.heatmap-cell[data-level="4"] {
+  background-color: var(--heat-4);
+  border-color: rgba(43, 43, 43, 0.35);
+}
+
+/* Hover: neo-brutalism lift effect */
+.heatmap-cell:hover {
+  transform: translate(-1px, -1px) scale(1.35);
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  border-color: var(--border-color);
+  z-index: 2;
+}
+
+.heatmap-cell:active {
+  transform: translate(0, 0) scale(1.1);
+  box-shadow: 0 0 0 var(--shadow-color);
+}
+
+/* ===========================================================
+   HEATMAP FOOTER / LEGEND
+   =========================================================== */
+.heatmap-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 2px dashed var(--border-color);
+}
+
+/* Activity level guide */
+.heatmap-level-guide {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.level-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-secondary);
+  background: var(--bg-canvas);
+}
+
+.level-tag[data-level="1"] { background: var(--heat-1); color: #1a4a1e; }
+.level-tag[data-level="2"] { background: var(--heat-2); color: #1a4a1e; }
+.level-tag[data-level="3"] { background: var(--heat-3); color: #ffffff; }
+.level-tag[data-level="4"] { background: var(--heat-4); color: #ffffff; }
+
+.heatmap-legend-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.heatmap-legend {
+  display: flex;
+  gap: 3px;
+}
+
+.heatmap-legend-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.legend-cell {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  display: inline-block;
+  border: 1.5px solid rgba(43, 43, 43, 0.15);
+}
+
+.legend-cell[data-level="0"] { background: var(--heat-0); }
+.legend-cell[data-level="1"] { background: var(--heat-1); }
+.legend-cell[data-level="2"] { background: var(--heat-2); }
+.legend-cell[data-level="3"] { background: var(--heat-3); }
+.legend-cell[data-level="4"] { background: var(--heat-4); }
+
+/* ===========================================================
+   STATS GRID — Each card with unique neo-brutalism tint
+   =========================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px 16px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+  animation: fade-up 0.4s ease both;
+}
+
+/* Neo-brutalism hover: lift + bigger shadow */
+.stat-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-card:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--shadow-color);
+}
+
+/* Unique card tints */
+.stat-card--fire    { background: var(--tint-fire); }
+.stat-card--gold    { background: var(--tint-gold); }
+.stat-card--mint    { background: var(--tint-mint); }
+.stat-card--lavender { background: var(--tint-lavender); }
+
+.stat-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+}
+
+/* Staggered entrance */
+.stat-card:nth-child(1) { animation-delay: 0.05s; }
+.stat-card:nth-child(2) { animation-delay: 0.1s; }
+.stat-card:nth-child(3) { animation-delay: 0.15s; }
+.stat-card:nth-child(4) { animation-delay: 0.2s; }
+
+/* ===========================================================
+   MODAL — Neo-brutalism dialog
+   =========================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 43, 43, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal),
+              visibility var(--transition-normal);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 3px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 440px;
+  box-shadow: 8px 8px 0 var(--shadow-color);
+  transform: translateY(20px) scale(0.95);
+  transition: transform var(--transition-normal);
+  overflow: hidden;
+}
+
+.modal-overlay.active .modal {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 0;
+}
+
+.modal-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-canvas);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  transition: all var(--transition-fast);
+  line-height: 1;
+}
+
+.modal-close:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--shadow-color);
+  background: var(--tint-fire);
+}
+
+.modal-close:active {
+  transform: translate(0, 0);
+  box-shadow: 1px 1px 0 var(--shadow-color);
+}
+
+.modal-body {
+  padding: 20px 24px;
+}
+
+.input-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.text-input {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--bg-canvas);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  transition: box-shadow var(--transition-fast);
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 0 var(--shadow-color);
+}
+
+.text-input:focus {
+  box-shadow: 3px 3px 0 var(--accent-green);
+  border-color: var(--accent-green);
+}
+
+.text-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Emoji Picker Grid */
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.emoji-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  font-size: 22px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-canvas);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.emoji-option:hover {
+  border-color: var(--border-color);
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  transform: translate(-1px, -1px);
+}
+
+.emoji-option.selected {
+  border-color: var(--accent-green);
+  background: var(--tint-mint);
+  box-shadow: 3px 3px 0 var(--accent-green);
+  transform: translate(-2px, -2px);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 24px 20px;
+}
+
+/* --- Buttons (neo-brutalism) --- */
+.btn {
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid var(--border-color);
+  transition: all var(--transition-fast);
+  line-height: 1;
+}
+
+.btn-primary {
+  background: var(--accent-green);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--shadow-color);
+}
+
+.btn-secondary {
+  background: var(--bg-canvas);
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  color: var(--text-primary);
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--shadow-color);
+}
+
+/* ===========================================================
+   TOOLTIP — Neo-brutalism style
+   =========================================================== */
+.tooltip {
+  position: fixed;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  pointer-events: none;
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 100ms ease, transform 100ms ease;
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+.tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===========================================================
+   FLOATING INDICATOR (+1, -1 feedback)
+   =========================================================== */
+.float-indicator {
+  position: fixed;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  pointer-events: none;
+  z-index: 300;
+  transform: translateX(-50%);
+  opacity: 1;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.float-indicator.animate {
+  transform: translateX(-50%) translateY(-28px);
+  opacity: 0;
+}
+
+.float-indicator.up   { color: var(--accent-green); }
+.float-indicator.down { color: var(--accent-red); }
+
+/* ===========================================================
+   FOOTER
+   =========================================================== */
+.footer {
+  text-align: center;
+  padding: 28px 24px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  border-top: 2px dashed var(--border-color);
+}
+
+/* ===========================================================
+   ANIMATIONS
+   =========================================================== */
+
+/* Staggered cell appearance */
+@keyframes cell-appear {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Click pop feedback */
+@keyframes cell-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.6); }
+  100% { transform: scale(1); }
+}
+
+.heatmap-cell.pop {
+  animation: cell-pop 0.25s ease;
+}
+
+/* Shake for validation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-5px); }
+  40%      { transform: translateX(5px); }
+  60%      { transform: translateX(-3px); }
+  80%      { transform: translateX(3px); }
+}
+
+.shake {
+  animation: shake 0.4s ease;
+}
+
+/* Stat card entrance */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================================================
+   RESPONSIVE
+   =========================================================== */
+@media (max-width: 768px) {
+  .header {
+    padding: 28px 16px 20px;
+  }
+
+  .container {
+    padding: 0 16px 40px;
+  }
+
+  .logo h1 {
+    font-size: 26px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+
+  .stat-card {
+    padding: 16px 12px;
+  }
+
+  .heatmap-card {
+    padding: 16px;
+  }
+
+  .heatmap-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .heatmap-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 20px 12px 16px;
+  }
+
+  .container {
+    padding: 0 12px 32px;
+  }
+
+  .logo {
+    gap: 12px;
+  }
+
+  .logo-badge {
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+  }
+
+  .logo h1 {
+    font-size: 22px;
+  }
+
+  .tagline {
+    font-size: 13px;
+  }
+
+  .habit-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .habit-pills {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .habit-pill {
+    flex-shrink: 0;
+  }
+
+  .add-habit-btn {
+    align-self: flex-start;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-value {
+    font-size: 22px;
+  }
+
+  .modal {
+    width: 95%;
+  }
+
+  .heatmap-level-guide {
+    gap: 4px;
+  }
+
+  .level-tag {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+}
